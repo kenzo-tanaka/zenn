@@ -3,7 +3,7 @@ title: "[Python]ブクログに登録した本一覧を月別で出力してみ�
 emoji: "🐥"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ['python']
-published: false
+published: true
 ---
 
 ## やりたいこと
@@ -170,6 +170,7 @@ https://www.atmarkit.co.jp/ait/articles/2008/21/news017.html
 
 ## 最終結果をマークダウンに書き出す
 
+あとは、分類しながら出力するだけです。
 
 ```py:booklog.py
 def main():
@@ -185,11 +186,15 @@ def main():
     f=open('books.md', 'w')
     books.sort(key=lambda b: int(b['register_date'])) # 登録年月でソート
     for key, group in groupby(books, key=lambda b: b['register_date']):
-        f.write(f'\n## {key}\n\n')
+        f.write(f'\n## {key}\n\n') # 登録年月を見出しにする
         for book in group:
             title=book['title']
             url=book['amazon_link']
-            f.write(f'- [{title}]({url})\n')
+            f.write(f'- [{title}]({url})\n') # 書籍をリンクで出力
 
     f.close()
 ```
+
+## 終わりに
+
+今年もたくさん本を読みたいです。
